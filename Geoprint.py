@@ -3,7 +3,6 @@ import argparse
 import socket
 import dpkt           #read the packets
 
-
 def ret_geo_ip(ip):  #for returning the geo location 
 
     try:
@@ -14,26 +13,37 @@ def ret_geo_ip(ip):  #for returning the geo location
             return f"{city}, {country}" if city else country
     
     except Exception as e:
-        print(f'{"":>3}[-] Exception: {e.__class__.__name__}')
+        print("[-] "+str(e))
         return 'Unregistered'
 
 
 
-class print_pcap:   
-    def __init__(self,pcap_file):
-        self.pcap_file = pcap_file 
+# class print_pcap:   
+#     def __init__(self,pcap_file):
+#         self.pcap_file = pcap_file 
 
-    def printit(self):
+#     def printit(self):
+#         for ts,buf in pcap:
+#             try:
+#                 eth = dpkt.ethernet.Ethernet(buf)
+#                 ip = eth.data #get the ip data
+#                 src=socket.inet_ntoa(ip.src)
+#                 dest=socket.inet_ntoa(ip.dst)
+#                 print(f"[+] src: {ret_geo_ip(src)} --> Dest: {ret_geo_ip(dest)}")
+#             except Exception as e:
+#                 print(e)
+                # pass
+
+def printit(pcap):
+    for ts,buf in pcap:
         try:
-            for ts,buf in pcap:
-                eth = dpkt.ethernet.Ethernet(buf)
-                ip = eth.data
-                src=socket.inet_ntoa(ip.src)
-                dest=socket.inet_ntoa(ip.dest)
-                print(f"[+] src: {ret_geo_ip(src)} --> Dest: {ret_geo_ip(dest)}")
+            eth = dpkt.ethernet.Ethernet(buf)
+            ip = eth.data #get the ip data
+            src=socket.inet_ntoa(ip.src) #converts to dooted quad string notation
+            dest=socket.inet_ntoa(ip.dst)
+            print(f"[+] src: {ret_geo_ip(src)} --> Dest: {ret_geo_ip(dest)}")
         except Exception as e:
-            print(f'{"":>3}[-] Exception: {e.__class__.__name__}')
-            pass
+            print(e)
 
 if __name__ == "__main__":
     parser=argparse.ArgumentParser(description="Print the GeoLocation of the IP adress ")
@@ -44,6 +54,5 @@ if __name__ == "__main__":
 
     with open(pcap,"rb") as file:
         pcapf=dpkt.pcap.Reader(file)
-        s1=print_pcap(pcapf)
-        s1.printit()
+        printit(pcapf)
 
