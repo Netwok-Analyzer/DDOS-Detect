@@ -2,6 +2,7 @@ import geoip2.database #used to handle maxmind database
 import argparse
 import socket
 import dpkt           #read the packets
+import google_Earth as gogo
 
 def ret_geo_ip(ip):  #for returning the geo location 
 
@@ -55,4 +56,10 @@ if __name__ == "__main__":
     with open(pcap,"rb") as file:
         pcapf=dpkt.pcap.Reader(file)
         printit(pcapf)
-
+        # kmlheader = '<?xml version="1.0" encoding="UTF-8"?>' \
+        #             '\n<kml xmlns="http://www.opengis.net/kml/2.2">' \
+        #             '\n<Document>\n'
+        # kmlfooter = '</Document>\n</kml>\n'
+        # kmldoc = kmlheader + gogo.plot_IPs(pcapf) + kmlfooter    
+        # print(kmldoc)
+    
