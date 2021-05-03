@@ -2,4 +2,5 @@
 
 Current features:
 1. Geo locate packet 
-2. google map visualization(work in progress)
+2. google earth visualization
+3. Detecting the DDOS attack through LOIC connected to IRC server(on going)
