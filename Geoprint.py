@@ -2,7 +2,7 @@ import geoip2.database #used to handle maxmind database
 import argparse
 import socket
 import dpkt           #read the packets
-import google_Earth as gogo
+# import google_Earth as gogo
 
 def ret_geo_ip(ip):  #for returning the geo location 
 
@@ -39,9 +39,11 @@ def printit(pcap):
     for ts,buf in pcap:
         try:
             eth = dpkt.ethernet.Ethernet(buf)
+            # print(eth) #repr()
             ip = eth.data #get the ip data
             src=socket.inet_ntoa(ip.src) #converts to dooted quad string notation
             dest=socket.inet_ntoa(ip.dst)
+            print(f"[+] src: {src} --> Dest: {dest}")
             print(f"[+] src: {ret_geo_ip(src)} --> Dest: {ret_geo_ip(dest)}")
         except Exception as e:
             print(e)
@@ -49,7 +51,7 @@ def printit(pcap):
 if __name__ == "__main__":
     parser=argparse.ArgumentParser(description="Print the GeoLocation of the IP adress ")
     parser.add_argument("-p" ,required=True, dest="pcap", help="Add the pacap file location")
-    
+    # parser.add_argument("-g" ,required=False, help="Reperesent on Google Earth")
     args= parser.parse_args()
     pcap = args.pcap
 

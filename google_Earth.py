@@ -2,6 +2,7 @@ import dpkt
 import socket
 import geoip2.database
 import argparse
+import webbrowser
 
 
 def ret_KML(ip):
@@ -47,7 +48,7 @@ def plot_IPs(pcap):
 
     return kml_pts
 
-
+#send_kml
 
 if __name__ == "__main__":
     parser=argparse.ArgumentParser(description="Print the GeoLocation of the IP adress ")
@@ -66,3 +67,5 @@ if __name__ == "__main__":
 
         with open("Google_mapped.kml","a+") as files:
             files.writelines(kmldoc)
+    
+    webbrowser.open("https://earth.google.com/web/")
