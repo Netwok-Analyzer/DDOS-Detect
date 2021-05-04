@@ -36,7 +36,7 @@ def ret_geo_ip(ip):  #for returning the geo location
                 # pass
 
 def printit(pcap):
-    for ts,buf in pcap:
+    for ts,buf in pcap: #ts= timestamp and buf= length  
         try:
             eth = dpkt.ethernet.Ethernet(buf)
             # print(eth) #repr()
