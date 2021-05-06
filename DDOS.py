@@ -78,12 +78,12 @@ def findattack(pcap):
             dst=stream.split(":")[1]
             print("[+] " + srce +" attacked " + dst +" with " + str(pktsent) + " packets")
 
-if __name__ == "__main__":
-    parser=argparse.ArgumentParser(description="Detect D-DOS Attack")
-    parser.add_argument("-p" , required=True,dest="pcap", help="Add the pcap file location")
+def DOSmain(pcap):
+    # parser=argparse.ArgumentParser(description="Detect D-DOS Attack")
+    # parser.add_argument("-p" , required=True,dest="pcap", help="Add the pcap file location")
     
-    args = parser.parse_args()
-    pcap = args.pcap
+    # args = parser.parse_args()
+    # pcap = args.pcap
 
     with open(pcap,"rb") as file:
         pcapf=dpkt.pcap.Reader(file)
