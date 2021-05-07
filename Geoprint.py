@@ -4,6 +4,7 @@ import socket
 import dpkt           #read the packets
 import google_Earth as gogo
 import DDOS
+from art import *
 
 def ret_geo_ip(ip):  #for returning the geo location 
 
@@ -34,11 +35,13 @@ def printit(pcap):
             print(e)
 
 if __name__ == "__main__":
-    parser=argparse.ArgumentParser(description="Print the GeoLocation of the IP adress ")
+    tprint("DoS-DETECT",font="3d_diagonal")
+    parser=argparse.ArgumentParser(description="Tool used to Detect DDOS attack and also provides a additional functionality to get the geolocation of the IP ")
     parser.add_argument("-l" ,required=True, dest="pcap", help="Add the pacap file location")
-    parser.add_argument("-g" ,required=False, dest="gearth" ,help="Want a Kml file to see on google earth? Yes/No")
-    parser.add_argument("-d" ,required=False, dest="Dos" ,help="Check for the DOS attack")
-    parser.add_argument("-p" ,required=False, dest="print" ,help="print the geolocation of the IP adresses")
+    parser.add_argument("-p" ,required=False, dest="print" ,help="print the geolocation of the IP adresses", action="store_true")
+    parser.add_argument("-g" ,required=False, dest="gearth" ,help="Want a Kml file to see on google earth?",action="store_true")
+    parser.add_argument("-d" ,required=False, dest="Dos" ,help="Check for the DOS attack",action="store_true")
+
     args= parser.parse_args()
     pcap = args.pcap
     gearth=args.gearth
@@ -46,12 +49,12 @@ if __name__ == "__main__":
     prnt=args.print
     
 
+    if prnt:
+        with open(pcap,"rb") as file:
+            pcapf=dpkt.pcap.Reader(file)
+            printit(pcapf)
 
-    with open(pcap,"rb") as file:
-        pcapf=dpkt.pcap.Reader(file)
-        printit(pcapf)
-
-    if gearth=="Yes":
+    if gearth:
         with open(pcap,"rb") as file:
             pcapf=dpkt.pcap.Reader(file)
             kmlheader = '<?xml version="1.0" encoding="UTF-8"?>' \
@@ -61,8 +64,8 @@ if __name__ == "__main__":
             kmldoc = kmlheader + gogo.plot_IPs(pcapf) + kmlfooter 
             with open("Google_mapped.kml","a+") as files:
                 files.writelines(kmldoc)
-   
-    with open(pcap,"rb") as file:
-        pcapf=dpkt.pcap.Reader(file)
-        DDOS.DOSmain(pcap)
+    if dos:
+        with open(pcap,"rb") as file:
+            pcapf=dpkt.pcap.Reader(file)
+            DDOS.DOSmain(pcap)
     
