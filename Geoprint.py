@@ -35,10 +35,10 @@ def printit(pcap):
             print(e)
 
 if __name__ == "__main__":
-    tprint("DoS-DETECT",font="3d_diagonal")
+    tprint("DoS-DETECT",font="3d_diognal")
     parser=argparse.ArgumentParser(description="Tool used to Detect DDOS attack and also provides a additional functionality to get the geolocation of the IP ")
-    parser.add_argument("-l" ,required=True, dest="pcap", help="Add the pacap file location")
-    parser.add_argument("-p" ,required=False, dest="print" ,help="print the geolocation of the IP adresses", action="store_true")
+    parser.add_argument("-l" ,required=True, dest="pcap", help="Add the pcap file location")
+    parser.add_argument("-p" ,required=False, dest="print" ,help="print the geolocation of the IP addresses", action="store_true")
     parser.add_argument("-g" ,required=False, dest="gearth" ,help="Want a Kml file to see on google earth?",action="store_true")
     parser.add_argument("-d" ,required=False, dest="Dos" ,help="Check for the DOS attack",action="store_true")
 
