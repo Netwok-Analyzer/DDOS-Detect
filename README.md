@@ -4,7 +4,7 @@
 
 ## usage: Geoprint.py [-h] -l PCAP [-p] [-g] [-d]
 
-Tool used to Detect DDOS attack and also provides a additional functionality to get the geolocation of the IP
+A network packet analyser tool, capable of automating various analytical steps during DFIR phase of a Cyber Incident.
 
  optional arguments:
 
