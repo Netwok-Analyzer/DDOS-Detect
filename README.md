@@ -35,7 +35,7 @@ Here we provide ease to the user by getting the visulisation of the IP addresses
 It is the last and the major functionality of the tool. So distributed denial-of-service [DDOS](https://www.cloudflare.com/en-in/learning/ddos/what-is-a-ddos-attack/) is a malicious attempt to disrupt the normal traffic of a targeted server, service or network by overwhelming the target or its surrounding infrastructure with a flood of Internet traffic. For detectiing this type of major attack we are taking 3 factors into consideration that can confirm us that a DDOS has been performed:
 - [LOIC](https://www.wallarm.com/what/what-is-low-orbit-ion-cannon-loic) Download by the attacker
 - [Hivemind](https://www.wallarm.com/what/what-is-low-orbit-ion-cannon-loic) issued by the attacker
-- No of packets sent by the attcaker
+- No of packets sent by the attacker
 
 Here we get into the TCP section of the IP and gets the data to see the HTTP header for confiramtion of the LOIC download and then we look for port 6667 i.e used by IRCservers for performing DDOS and get the command and next we get the count of the packets.
 This is done by utilizing the dpkt and socket library
